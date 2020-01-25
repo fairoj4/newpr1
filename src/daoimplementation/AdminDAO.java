@@ -17,6 +17,7 @@ public class AdminDAO extends HttpServlet {
         String username1 =user.getUserName();
         String password1 = user.getPassword();
 system.out.println("lllllll");
+negljrglbljadbfljbdsjfblbdsflf lfblsdfl
        
        try {
            con =GetDBConnection .getDBConnection();           
