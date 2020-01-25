@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Create Vendor</title>
+<style>
+body {
+    background-image: url("images/vendor.jpg");
+  background-size: center;
+}
+
+h1 {
+    color: blue;
+    text-align: center;
+}
+
+p {
+    font-family: verdana;
+    font-size: 20px;
+}
+a {
+	color: white;
+}
+
+.adduser {
+	align: center;
+}
+
+a {
+	color: black;
+}
+input {
+	color: blue;
+}
+</style>
+</head>
+<body>
+
+<h1 align="center"> Add New Vendor </h1><br/><br/>
+<div class="adduser" align="center">
+<form action="adduser-success.jsp" method="post">
+	<table>
+		<tr><td>User Id</td><td><input type="text" name="userid" placholder="UserID" autofocus/></td></tr>
+		<tr><td>Password</td><td><input type="password" name="password" placeholder="Password"/></td></tr>
+		<tr><td>Vendor Name</td><td><input type="text" name="vendorname" placeholder="Vendor Name"/></td></tr>
+		<tr><td>Phone Number</td><td><input type="text" name="phoneno" placeholder="contact" maxlength="10"/></td></tr>
+		<tr><td>Email Address</td><td><input type="email" name="email" placeholder="example@example.com"/></td></tr>
+		<tr><td colspan="2"><input type="submit" value="add vendor"></td></tr>
+	</table>
+</form>
+</div>
+<br/><br/>
+<center><a href="viewvendor.jsp" > View All Vendor Details</a><br/><br/><br/>
+<a href="adminindex.jsp"> Home</a></center>
+</body>
+</html>

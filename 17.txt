@@ -1,0 +1,106 @@
+
+========================================================================
+question 17a
+------------
+fnpalindrome()
+{
+a=`echo $1 |rev`
+if test "$1" = "$a"
+then
+echo "$1 is a palindrome"
+else
+echo "$1 is not a palindrome"
+fi
+}
+fnpalindrome sis
+
+fnprime()
+{
+i=2
+k=0
+while test $i -lt $1
+do
+v=`expr $1 % $i`
+i=`expr $i + 1`
+if test $v -eq 0
+then
+k=`expr $k + 1`
+fi
+done
+if test $k -eq 0
+then
+echo "$1 is prime"
+else
+echo "$1 is not prime"
+fi
+}
+fnprime 5
+========================================================================
+question 17b
+----------------
+
+#program for bill management
+echo "1.add customer details
+2.modify customer details
+3.exit"
+echo "enter choice"
+read choice
+case $choice in
+1)customer_id=`tail -1 customer.dat | cut -d":" -f1`
+if test -z $customer_id
+then
+customer_id=1
+else
+customer_id=`expr $customer_id + 1`
+fi
+echo "enter customer name"
+read customer_name
+if test -n $customer_name
+then
+echo "$customer_name"
+echo "enter customer area"
+read customer_area
+if test -z `echo $customer_area | tr -d "[:alpha:]"`
+then
+echo "$customer_area"
+echo "$customer_id:$customer_name:$customer_area" >> customer.dat
+unit_consumed=0
+bill_amount=0
+echo "$customer_id:$unit_consumed:$bill_amount" >> bill.dat
+else
+echo "customer area should be string"
+fi
+else
+echo "customer name can not be null"
+fi
+;;
+2)echo "enter customer id"
+read customer_id
+grep -q $customer_id customer.dat
+if test $? -eq 0
+then
+echo "enter unit consumed"
+read new_unit_consumed
+if test $new_unit_consumed -gt 0
+then
+echo "$new_unit_consumed"
+new_bill_amount=`expr $new_unit_consumed \* 3`
+echo "$new_bill_amount"
+ln=`cut -d":" -f1 bill.dat | grep -nw $customer_id | cut -d":" -f1`
+a=`grep -w $customer_id bill.dat | cut -d":" -f2`
+echo `sed -ie "$ln s/\<$a\>/$new_unit_consumed/g" bill.dat`
+b=`grep -w $customer_id bill.dat | cut -d":" -f3`
+n=`head -$ln bill.dat | tail -1 | grep -o "$b" | wc -l`
+echo `sed -ie "$ln s/\<$b\>/$new_bill_amount/$n" bill.dat`
+else
+echo "unit consumed should be greater than 0"
+fi
+else
+echo "customer id does not exist"
+fi
+;;
+3)exit
+;;
+*)echo "invalid option"
+;;
+esac
